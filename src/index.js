@@ -20,16 +20,17 @@ const rest = new REST({ version: '10' }).setToken(TOKEN)
 
 
 client.on('ready', () => console.log(`${client.user.tag} Has online`))
+client.on('interactionCreate', (interation) => {
+  if (interation.isChatInputCommand()) {
+    interation.reply('Order Something')
+  }
+})
 
 async function main() {
   const commands = [
     {
-      name: 'ping',
-      description: 'Replies with Pong!',
-    },
-    {
-      name: 'server',
-      description: 'Replies with server info!',
+      name: 'order',
+      description: 'Order something',
     }
   ]
 
