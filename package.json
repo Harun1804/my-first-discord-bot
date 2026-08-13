@@ -5,8 +5,8 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
+    "dev": "tsx src/index.ts --watch",
     "start": "node build/index.js",
-    "start:dev": "tsx src/index.ts",
     "build": "tsc",
     "command:deploy": "tsx src/deploy-commands.ts",
     "command:clear": "tsx src/clear-commands.ts",
