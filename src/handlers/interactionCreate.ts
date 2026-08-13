@@ -1,9 +1,12 @@
-export async function handleInteraction(interaction) {
+import type { Interaction } from 'discord.js';
+import { commands } from '../commands/index.js';
+
+export async function handleInteraction(interaction: Interaction): Promise<void> {
 	if (!interaction.isChatInputCommand()) {
 		return;
 	}
 
-	const command = interaction.client.commands.get(interaction.commandName);
+	const command = commands.get(interaction.commandName);
 	if (!command) {
 		console.warn(`No handler found for /${interaction.commandName}.`);
 		return;

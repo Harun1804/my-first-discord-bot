@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
+import type { Command } from '../../types/command.js';
 
-export default {
+const ping: Command = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Check whether the bot is responding.'),
@@ -8,3 +9,5 @@ export default {
 		await interaction.reply('Pong!');
 	},
 };
+
+export default ping;
