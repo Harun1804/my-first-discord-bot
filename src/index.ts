@@ -1,12 +1,14 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
-import 'dotenv/config';
-import { config } from './config/config.js';
-import { handleInteraction } from './handlers/interactionCreate.js';
+import { Client, Events, GatewayIntentBits } from "discord.js";
+import "dotenv/config";
+import { config } from "./config/config.js";
+import { commands } from "./commands/index.js";
+import { handleInteraction } from "./handlers/interactionCreate.js";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+(client as typeof client & { commands: typeof commands }).commands = commands;
 
 client.once(Events.ClientReady, (readyClient) => {
-	console.log(`Ready as ${readyClient.user.tag}.`);
+  console.log(`Ready as ${readyClient.user.tag}.`);
 });
 
 client.on(Events.InteractionCreate, handleInteraction);
