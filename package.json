@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx src/index.ts --watch",
     "start": "node build/index.js",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "command:deploy": "tsx src/deploy-commands.ts",
     "command:clear": "tsx src/clear-commands.ts",
     "typecheck": "tsc --noEmit",
@@ -25,6 +25,7 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
+    "tsc-alias": "^1.9.1",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }

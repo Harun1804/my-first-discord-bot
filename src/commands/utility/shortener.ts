@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { Command } from "../../types/command.js";
-import { validateUrl } from "../../utils/validate.js";
-import { generateNewUrl } from "../../utils/generate.js";
+import type { Command } from "@/types/command.js";
+import { validateUrl } from "@/utils/validate.js";
+import { generateNewUrl } from "@/utils/generate.js";
 
 const shortener: Command = {
   data: new SlashCommandBuilder()
