@@ -1,5 +1,5 @@
 import type { Interaction } from 'discord.js';
-import { commands } from '../commands/index.js';
+import { commands } from '@/commands/index.js';
 
 export async function handleInteraction(interaction: Interaction): Promise<void> {
 	if (!interaction.isChatInputCommand()) {

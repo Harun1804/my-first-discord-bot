@@ -1,7 +1,7 @@
 import about from './utility/about.js';
 import ping from './utility/ping.js';
 import shortener from './utility/shortener.js';
-import type { Command } from '../types/command.js';
+import type { Command } from '@/types/command.js';
 
 const commandModules: Command[] = [about, ping, shortener];
 
