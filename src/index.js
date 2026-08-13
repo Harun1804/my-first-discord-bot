@@ -1,52 +1,16 @@
-import { Client, GatewayIntentBits, Routes } from 'discord.js'
-import dotenv from 'dotenv'
-import { REST } from '@discordjs/rest'
+import { Client, Events, GatewayIntentBits } from 'discord.js';
+import 'dotenv/config';
+import { config } from './config/config.js';
+import { commands } from './commands/index.js';
+import { handleInteraction } from './handlers/interactionCreate.js';
 
-dotenv.config()
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.commands = commands;
 
-const TOKEN = process.env.BOT_TOKEN
-const CLIENT_ID = process.env.BOT_CLIENT_ID
-const GUILD_ID = process.env.BOT_GUILD_ID
+client.once(Events.ClientReady, (readyClient) => {
+	console.log(`Ready as ${readyClient.user.tag}.`);
+});
 
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ]
-})
+client.on(Events.InteractionCreate, handleInteraction);
 
-const rest = new REST({ version: '10' }).setToken(TOKEN)
-
-
-client.on('ready', () => console.log(`${client.user.tag} Has online`))
-client.on('interactionCreate', (interation) => {
-  if (interation.isChatInputCommand()) {
-    interation.reply('Order Something')
-  }
-})
-
-async function main() {
-  const commands = [
-    {
-      name: 'order',
-      description: 'Order something',
-    }
-  ]
-
-  try {
-    console.log('Started refreshing application (/) commands.')
-    
-    await rest.put(
-      Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
-      { body: commands },
-    )
-    
-    console.log('Successfully reloaded application (/) commands.')
-    client.login(TOKEN)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-main()
+client.login(config.token);
